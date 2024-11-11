@@ -7,12 +7,11 @@ function Inicio() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Cambiar la URL a tu API backend
-    fetch('https://bazar-backend-ynxj.onrender.com/products')  // Asegúrate de que esta URL sea la correcta
+    fetch('https://bazar-backend-ynxj.onrender.com/products')
       .then(response => response.json())
       .then(data => {
         console.log("Datosssss", data);
-        setProducts(data);  // Usa 'data' directamente, ya que es el array de productos
+        setProducts(data);  
       })
       .catch(error => console.error('Error fetching products:', error));
   }, []);
