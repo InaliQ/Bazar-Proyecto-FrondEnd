@@ -26,29 +26,24 @@ function Carrito() {
     fetchCarrito();
   }, []);
 
-  // Función para calcular el total de los productos en el carrito
   const calcularTotal = (productos) => {
     const totalCalculado = productos.reduce((acc, producto) => acc + producto.price * producto.quantity, 0);
     setTotal(totalCalculado);
   };
 
-  // Función para eliminar un producto del carrito
   const eliminarProducto = async (productId) => {
-    console.log("Intentando eliminar el producto con ID:", productId); // Verificar el valor de productId
-
+    console.log("Intentando eliminar el producto con ID:", productId); 
     try {
       const response = await fetch(`https://bazar-backend-ynxj.onrender.com/shopCar/${productId}`, {
         method: 'DELETE',
       });
 
       if (response.ok) {
-        // Filtrar el producto eliminado del carrito
         const nuevosProductos = productosCarrito.filter(producto => producto.productId !== productId);
         setProductosCarrito(nuevosProductos);
         calcularTotal(nuevosProductos);
       } else {
-        // Si la respuesta no es OK, mostrar el cuerpo de la respuesta
-        const errorMessage = await response.text();  // O usa response.json() si la respuesta es JSON
+        const errorMessage = await response.text();
         console.log("Error al eliminar el producto:", errorMessage);
         console.error("Código de error:", response.status);
       }
@@ -59,7 +54,7 @@ function Carrito() {
 
 
   const generarIdAleatorio = () => {
-    return Math.random().toString(36).substring(2, 15);  // Genera un ID aleatorio
+    return Math.random().toString(36).substring(2, 15);
   };
 
   const realizarCompra = async () => {
@@ -75,7 +70,7 @@ function Carrito() {
         image: prod.image,
         description: prod.description,
         quantity: prod.quantity,
-      })), // Asegúrate de que productos tenga todos los atributos necesarios
+      })),
     };
 
     console.log("Datos Compra",compra)
@@ -92,13 +87,13 @@ function Carrito() {
   
       if (response.ok) {
         toast.success(`Venta realizada con exito <3 !`, {
-          position: "top-right", // Posición de la alerta
-          autoClose: 5000, // Tiempo que la alerta estará visible (en ms)
-          hideProgressBar: false, // Mostrar barra de progreso
-          closeOnClick: true, // Cerrar al hacer clic
-          pauseOnHover: true, // Pausar al pasar el mouse
-          draggable: true, // Hacerla arrastrable
-          progress: undefined, // No mostrar el progreso
+          position: "top-right", 
+          autoClose: 5000, 
+          hideProgressBar: false, 
+          closeOnClick: true, 
+          pauseOnHover: true,
+          draggable: true, 
+          progress: undefined, 
         });
         setProductosCarrito([]); 
         setTotal(0);  
