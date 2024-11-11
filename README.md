@@ -1,9 +1,14 @@
-# React + Vite
+# React + Vite Bazar Universal
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
+Actividad de un bazar elaborado por SOFTLI Inc
 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 # Bazar-Proyecto-FrondEnd
+
+- Aplicacion PWA
+- con administracion de productos, detalle, carrito y venta.
+
+
+
+Todos los derechos reservados a SOFTLI Inc
