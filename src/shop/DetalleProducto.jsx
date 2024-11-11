@@ -1,17 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'; // Importa los estilos de toastify
+import 'react-toastify/dist/ReactToastify.css';
 
 function DetalleProducto() {
-  // Estado para almacenar los detalles del producto
   const [producto, setProducto] = useState(null);
   const { id } = useParams();
-  
-  // Estado para manejar el carrito
   const [carrito, setCarrito] = useState([]);
 
-  // Función para obtener los detalles del producto desde el json-server
   useEffect(() => {
     const fetchProducto = async () => {
       try {
@@ -30,10 +26,8 @@ function DetalleProducto() {
     fetchProducto();
   }, [id]);
 
-  // Función para agregar el producto al carrito en el json-server
   const agregarAlCarrito = async () => {
     try {
-      // Agregar producto al carrito en el json-server
       const response = await fetch('https://bazar-backend-ynxj.onrender.com/shopCar', {
         method: 'POST',
         headers: {
@@ -45,23 +39,23 @@ function DetalleProducto() {
           price: producto.price,
           image: producto.thumbnail,
           description: producto.description,
-          quantity: 1, // Puedes ajustar la cantidad según lo necesites
+          quantity: 1, 
         }),
       });
 
       if (response.ok) {
         const data = await response.json();
-        setCarrito((prevCarrito) => [...prevCarrito, data]); // Actualizamos el estado del carrito
+        setCarrito((prevCarrito) => [...prevCarrito, data]); 
         
         // Muestra una alerta bonita
         toast.success(`${producto.title} ha sido agregado al carrito!`, {
-          position: "top-right", // Posición de la alerta
-          autoClose: 5000, // Tiempo que la alerta estará visible (en ms)
-          hideProgressBar: false, // Mostrar barra de progreso
-          closeOnClick: true, // Cerrar al hacer clic
-          pauseOnHover: true, // Pausar al pasar el mouse
-          draggable: true, // Hacerla arrastrable
-          progress: undefined, // No mostrar el progreso
+          position: "top-right", 
+          autoClose: 5000, 
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true, 
+          draggable: true,
+          progress: undefined,
         });
       } else {
         console.error("Error al agregar al carrito");
@@ -106,7 +100,7 @@ function DetalleProducto() {
                 ${((producto.price * (100 + producto.discountPercentage)) / 100).toFixed(2)}
               </span>
               <button
-                onClick={agregarAlCarrito} // Llamada a la función cuando se hace clic
+                onClick={agregarAlCarrito}
                 className="flex ml-auto text-white bg-pink-500 border-0 py-2 px-6 focus:outline-none hover:bg-pink-600 rounded"
               >
                 Agregar al carrito
@@ -121,7 +115,7 @@ function DetalleProducto() {
                     src={image}
                     alt={`Producto ${index + 1}`}
                     className="w-16 h-16 object-cover rounded"
-                    onError={(e) => e.target.src = 'https://dummyimage.com/100x90'} // Imagen por defecto si hay error al cargar
+                    onError={(e) => e.target.src = 'https://dummyimage.com/100x90'} 
                   />
                 ))}
               </div>
@@ -130,7 +124,6 @@ function DetalleProducto() {
         </div>
       </div>
 
-      {/* Contenedor de la alerta */}
       <ToastContainer />
     </section>
   );
